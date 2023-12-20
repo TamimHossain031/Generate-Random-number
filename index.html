@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random number Generator</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section>
+        <h1>Generate a <br/><span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="password">
+            <img src="./image/copy.png" alt="copy" class="copy">
+        </div>
+        <button class="btn-action"><img src="./image/generate.png" alt="generate">Generate Password</button>
+    </section>   
+    <script>
+        let display = document.querySelector('#password');
+        let action_btn = document.querySelector('.btn-action');
+        let copy_btn = document.querySelector('.copy');
+       
+       
+        const length = 12;
+        const capital_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const small_letter = "abcdefghijklmnopqrstuvwxyz";
+        const number = "0123456789";
+        const charecter = " ~`! @#$%^&*()_-+={[}]|;<,>.?/";
+        const all = capital_letter + small_letter + charecter + number;
+       
+        
+        function random (){
+            password ='';
+            password += capital_letter[Math.floor(Math.random()*capital_letter.length)];
+            password += small_letter[Math.floor(Math.random()*small_letter.length)];
+            password += number[Math.floor(Math.random()*number.length)];
+            password += charecter[Math.floor(Math.random()*charecter.length)];
+            while(length > password.length){
+              password += all[Math.floor(Math.random()*all.length)];
+            }
+            display.value = password;
+        }
+
+        function copy(){
+            display.select();
+            document.execCommand('copy');
+        }
+
+        action_btn.addEventListener('click',random);
+        copy_btn.addEventListener('click',copy);
+    </script>
+</body>
+</html>
